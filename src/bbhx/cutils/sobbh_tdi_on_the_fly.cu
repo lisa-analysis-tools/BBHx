@@ -43,8 +43,8 @@
 // already folded in to match get_hp_hc's cos(phase) / sin(phase) pattern.
 
 #define EULER_GAMMA_SOBBH 0.57721566490153286060
-#define MTSUN_SOBBH      4.9254909476412675e-06
-#define PARSEC_SOBBH     3.085677581491367e16
+#define MTSUN_SOBBH      LISACONSTANTS_MTSUN    // lisaconstants, via constants.h
+#define PARSEC_SOBBH     LISACONSTANTS_PARSEC
 
 CUDA_DEVICE
 double SOBBHTDIonTheFly::sobbh_phase_fn(double x, double sigma, double delta, double eta, double s)

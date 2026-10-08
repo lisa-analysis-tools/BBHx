@@ -2,16 +2,19 @@
 #define __CONSTANTS_H__
 
 
-//#include "pdbParam.h" // LISA constants
-#define MSUN_SI 1.98848e+30
-#define YRSID_SI 31558149.763545603
-#define AU_SI 149597870700.0
-#define C_SI 299792458.
-#define G_SI 6.674080e-11
-#define GMSUN 1.3271244210789466e+20
-#define MTSUN_SI 4.925491025873693e-06
-#define MRSUN_SI 1476.6250615036158
-#define PC_SI 3.0856775814913674e+16
+// Physical constants: lisaconstants, via the generated lisaconstants_values.h
+// (python -m lisatools.utils.lisaconstants_header; checked against the
+// installed lisaconstants by tests/test_lisaconstants_values.py).
+#include "lisaconstants_values.h"
+#define MSUN_SI LISACONSTANTS_SOLAR_MASS
+#define YRSID_SI LISACONSTANTS_ASTRONOMICAL_YEAR
+#define AU_SI LISACONSTANTS_ASTRONOMICAL_UNIT
+#define C_SI LISACONSTANTS_SPEED_OF_LIGHT
+#define G_SI LISACONSTANTS_GRAVITATIONAL_CONSTANT
+#define GMSUN LISACONSTANTS_SOLAR_MASS_PARAMETER
+#define MTSUN_SI LISACONSTANTS_MTSUN
+#define MRSUN_SI LISACONSTANTS_MRSUN
+#define PC_SI LISACONSTANTS_PARSEC
 
 #define PI           3.141592653589793238462643383279502884
 #define PI_2         1.570796326794896619231321691639751442
@@ -42,8 +45,8 @@
 
 //#define YRSID_SI 31558149.763545600
 
-#define F0 3.168753578687779e-08
-#define Omega0 1.9909865927683788e-07
+#define F0 (1.0 / YRSID_SI)
+#define Omega0 (2.0 * PI / YRSID_SI)
 
 //#define ua 149597870700.
 //#define R_SI 149597870700.
@@ -56,8 +59,8 @@
 //#define INVSQRT6 0.4082482904638631
 //#define SQRT2 1.4142135623730951
 #define L_SI 2.5e9
-#define eorbit 0.004824185218078991
-#define ConstOmega 1.99098659277e-7
+#define eorbit (L_SI / (2.0 * SQRT3 * AU_SI))
+#define ConstOmega Omega0
 
 
 #endif // __CONSTANTS_H__
