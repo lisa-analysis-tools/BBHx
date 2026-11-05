@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants.h"
 #include "Likelihood.hh"
+#include <vector>
 
 #ifdef __CUDACC__
 #include "cuComplex.h"
@@ -492,8 +493,8 @@ CUDA_CALLABLE_MEMBER void our_cblas_zdotc(
 void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, long* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll)
 {
 
-    cmplx result_d_h[numBinAll];
-    cmplx result_h_h[numBinAll];
+    std::vector<cmplx> result_d_h(numBinAll);
+    std::vector<cmplx> result_h_h(numBinAll);
 
     #pragma omp parallel for
     for (int bin_i = 0; bin_i < numBinAll; bin_i += 1)
