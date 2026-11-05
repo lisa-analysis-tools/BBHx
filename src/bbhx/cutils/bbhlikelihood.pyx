@@ -2,6 +2,7 @@ import numpy as np
 cimport numpy as np
 from libcpp cimport bool
 
+from libc.stdint cimport int64_t
 from gpubackendtools import wrapper
 
 assert sizeof(int) == sizeof(np.int32_t)
@@ -14,7 +15,7 @@ cdef extern from "Likelihood.hh":
                         double* dataFreqs,
                         int numBinAll, int data_length, int nChannels);
 
-    void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, long* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll);
+    void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, int64_t* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll);
 
     void prep_hdyn_wrap(cmplx* A0_in, cmplx* A1_in, cmplx* B0_in, cmplx* B1_in, cmplx* d_arr, cmplx* h0_arr, double* S_n_arr, double df, int* bins, double* f_dense, double* f_m_arr, int data_length, int nchannels, int length_f_rel);
 
@@ -50,7 +51,7 @@ def direct_like_wrap(*args, **kwargs):
     cdef size_t inds_start_in = inds_start
     cdef size_t ind_lengths_in = ind_lengths
 
-    direct_like(<cmplx*> d_h_in, <cmplx*> h_h_in, <cmplx*> dataChannels_in, <double*> noise_weight_times_df_in, <long*> templateChannels_ptrs_in, <int*> inds_start_in, <int*> ind_lengths_in, data_stream_length, numBinAll)
+    direct_like(<cmplx*> d_h_in, <cmplx*> h_h_in, <cmplx*> dataChannels_in, <double*> noise_weight_times_df_in, <int64_t*> templateChannels_ptrs_in, <int*> inds_start_in, <int*> ind_lengths_in, data_stream_length, numBinAll)
 
 
 def prep_hdyn(*args, **kwargs):
