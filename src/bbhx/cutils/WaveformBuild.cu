@@ -144,7 +144,7 @@ void TDI(cmplx *templateChannels, double *dataFreqsIn, double *freqsOld, double 
     }
 }
 
-void InterpTDI(long *templateChannels_ptrs, double *dataFreqs, double *freqs, double *propArrays, double *c1, double *c2, double *c3, double *t_start_in, double *t_end_in, int length, int data_length, int numBinAll, int numModes, long *inds_ptrs, int *inds_start, int *ind_lengths)
+void InterpTDI(int64_t *templateChannels_ptrs, double *dataFreqs, double *freqs, double *propArrays, double *c1, double *c2, double *c3, double *t_start_in, double *t_end_in, int length, int data_length, int numBinAll, int numModes, int64_t *inds_ptrs, int *inds_start, int *ind_lengths)
 {
 #ifdef __CUDACC__
     cudaStream_t streams[numBinAll];

@@ -379,7 +379,7 @@ void noiseweight_template(cmplx* templateChannels, double* noise_weight_times_df
 // compute the likelihood directly
 // different for CPU and GPU cause of streams
 #ifdef __CUDACC__
-void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, long* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll)
+void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, int64_t* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll)
 {
 
     // initialize everything
@@ -489,7 +489,7 @@ CUDA_CALLABLE_MEMBER void our_cblas_zdotc(
     *c = _out;
 }
 
-void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, long* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll)
+void direct_like(cmplx* d_h, cmplx* h_h, cmplx* dataChannels, double* noise_weight_times_df, int64_t* templateChannels_ptrs, int* inds_start, int* ind_lengths, int data_stream_length, int numBinAll)
 {
 
     cmplx result_d_h[numBinAll];

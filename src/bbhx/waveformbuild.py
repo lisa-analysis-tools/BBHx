@@ -187,10 +187,13 @@ class TemplateInterpFD(BBHxParallelModule):
 
         # get pointers to all the index arrays of different length
         try:
-            self.ptrs = ptrs = np.asarray([ind_i.data.ptr for ind_i in inds])
+            self.ptrs = ptrs = np.asarray(
+                [ind_i.data.ptr for ind_i in inds], dtype=np.int64
+            )
         except AttributeError:
             self.ptrs = ptrs = np.asarray(
-                [ind_i.__array_interface__["data"][0] for ind_i in inds]
+                [ind_i.__array_interface__["data"][0] for ind_i in inds],
+                dtype=np.int64,
             )
 
         # initialize template information
@@ -205,14 +208,16 @@ class TemplateInterpFD(BBHxParallelModule):
         # get pointers to template carriers so they can be run in streams
         try:
             template_carrier_ptrs = np.asarray(
-                [temp_carrier.data.ptr for temp_carrier in self.template_carrier]
+                [temp_carrier.data.ptr for temp_carrier in self.template_carrier],
+                dtype=np.int64,
             )
         except AttributeError:
             template_carrier_ptrs = np.asarray(
                 [
                     temp_carrier.__array_interface__["data"][0]
                     for temp_carrier in self.template_carrier
-                ]
+                ],
+                dtype=np.int64,
             )
 
         # fill templates
